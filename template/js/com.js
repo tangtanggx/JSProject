@@ -1,5 +1,6 @@
 const ODom = {
     getDom(domName) {
+        // innerHTML
         if (domName) return document.querySelector(domName)
     },
 
@@ -11,14 +12,7 @@ const ODom = {
     },
 
     setStyle(dom, obj) {
-        let styleStr = dom.getAttribute('style') || '';
-        styleStr = styleStr.replaceAll(' ', '');
-        const arr = styleStr.split(';');
-        style = {};
-        arr.forEach(x => {
-            const [key, value] = x.split(':');
-            style[key] = value;
-        })
+        const style = this.getStyle(dom)
         Object.assign(style, obj);
 
         let newStyleStr = '';
@@ -26,6 +20,23 @@ const ODom = {
             newStyleStr += `${k}:${obj[k]};`
         })
         newStyleStr && dom.setAttribute('style', newStyleStr);
+    },
+    getStyle(dom) {
+        let styleStr = dom.getAttribute('style') || '';
+        styleStr = styleStr.replaceAll(' ', '');
+        const arr = styleStr.split(';').filter(x => x);
+        const style = {};
+        arr.forEach(x => {
+            const [key, value] = x.split(':');
+            style[key] = value;
+        })
+        return style
+    }
+}
+
+const OFile = {
+    getAssetsImg(url) {
+        return `./assets/img/${url}`
     }
 }
 

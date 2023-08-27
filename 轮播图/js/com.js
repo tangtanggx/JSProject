@@ -47,8 +47,8 @@ const ODrag = {
         dom.setAttribute('draggable', false);
 
         dom.onmousedown = (e) => {
-            console.log(e);
             Object.assign(da, { x: e.x, y: e.y });
+            console.log(da);
             const tempObj = {};
 
             window.onmousemove = (e) => {
@@ -69,5 +69,11 @@ const ODrag = {
         }
 
 
+    }
+}
+
+const OFile = {
+    getAssetsImg(url) {
+        return `./assets/img/${url}`
     }
 }
